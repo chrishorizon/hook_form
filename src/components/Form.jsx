@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
 
 const Form = (props) => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPass, setConfirmPass] = useState("");
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [confirmPass, setConfirmPass] = useState("");
 
-    const [ state, setState ] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPass: ""
-      })
-    
+    // Destructuring props dict. from Inputs and setInputs
+    const { inputs, setInputs } = props;
+
+    // ...inputs brings in entire collection of state (from app data) and spreads it out.
+    // [e.target.name] goes inside of e, find what was targeted and bring out attribute name
+    // [e.target.value] sets it to the target value, value gets captured when the client changes info.
+    const onChange = e => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
+    };
 
     // const createUser = (e) => {
     //     e.preventDefault();
@@ -31,25 +35,24 @@ const Form = (props) => {
             <form>
                 <div>
                     <label>First Name </label>
-                    <input onChange={(e) => setFirstName(e.target.value)} type="text" name="firstName" value={firstName} id="" />
+                    <input onChange={onChange} type="text" name="firstName" />
                 </div>
                 <div>
                     <label>Last Name </label>
-                    <input onChange={(e) => setLastName(e.target.value)} type="text" name="lastName" vlaue={lastName} id="" />
+                    <input onChange={onChange} type="text" name="lastName" />
                 </div>
                 <div>
                     <label>Email </label>
-                    <input onChange={(e) => setEmail(e.target.value)} type="text" name="email" value={email} />
+                    <input onChange={onChange} type="email" name="email" />
                 </div>
                 <div>
                     <label>Password </label>
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" value={password} />
+                    <input onChange={onChange} type="password" name="password" />
                 </div>
                 <div>
                     <label>Confirm Password </label>
-                    <input onChange={(e) => setConfirmPass(e.target.value)} type="password" name="confirmPass" value={confirmPass} />
+                    <input onChange={onChange} type="password" name="confirmPass" />
                 </div>
-
             </form>
         </div>
     )

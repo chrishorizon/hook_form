@@ -4,6 +4,8 @@ import FormInfo from './components/FormInfo'
 import React, { useState } from 'react'
 
 function App() {
+
+  // Destructure state - Object
   const [ state, setState ] = useState({
     firstName: "",
     lastName: "",
@@ -12,10 +14,10 @@ function App() {
     confirmPass: ""
   })
 
-  return (
+  return ( //Input and setInputs were collectted into a dict. called props
     <div className="App">
-      <Form />
-      <FormInfo />
+      <Form inputs={state} setInputs={setState} />
+      <FormInfo data={state} />
     </div>
   );
 }
