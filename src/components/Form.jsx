@@ -25,6 +25,7 @@ const Form = (props) => {
         "firstName" : false,
         "lastName" : false,
         "email" : false,
+        "password" : false,
         "confirmPass" : false
     })
     
@@ -34,18 +35,22 @@ const Form = (props) => {
         let firstName = false;
         let lastName = false;
         let email = false;
+        let password = false;
         let confirmPass = false;
         // First name must contain more than 2 characters
-        if(inputs.firstName.length >= 2){
+        if(inputs.firstName.length >= 1){
             firstName = true;
         }
         // Last name must contain more than 2 characters
-        if(inputs.lastName.length > 2){
+        if(inputs.lastName.length >= 1){
             lastName = true;
         }
         // Email must contain more than 5 characters
-        if(inputs.email.length > 5){
+        if(inputs.email.length >= 4){
             email = true;
+        }
+        if(inputs.password.length >= 7){
+            password = true;
         }
         // Password must match and be at least 8 characters
         if(inputs.confirmPass != inputs.password){
@@ -55,6 +60,7 @@ const Form = (props) => {
             firstName,
             lastName,
             email,
+            password,
             confirmPass
         })
     }
@@ -75,24 +81,28 @@ const Form = (props) => {
                 <div>
                     <label>First Name </label>
                     <input onChange={onChange} type="text" name="firstName" />
-                    {(validState.firstName) ? null : <p style={{"color" : "red"}}>Error</p> }
+                    {(validState.firstName) ? null : <p style={{"color" : "red"}}>First name requires at least 2 characters</p> }
                     {/* {(inputs.firstName.length < 2) ? <p style={{"color" : "red"}}> First name must contain more than 2 characters</p> : null} */}
                 </div>
                 <div>
                     <label>Last Name </label>
                     <input onChange={onChange} type="text" name="lastName" />
+                    {(validState.lastName) ? null : <p style={{'color' : 'red'}}>Last name requires at least 2 characters</p> }
                 </div>
                 <div>
                     <label>Email </label>
                     <input onChange={onChange} type="email" name="email" />
+                    {(validState.email) ? null : <p style={{'color' : 'red'}}>Email must be atleast 5 characters</p> }
                 </div>
                 <div>
                     <label>Password </label>
                     <input onChange={onChange} type="password" name="password" />
+                    {(validState.password) ? null : <p style={{"color" : "red"}}>Password must be atleast 8 characters long</p> }
                 </div>
                 <div>
                     <label>Confirm Password </label>
                     <input onChange={onChange} type="password" name="confirmPass" />
+                    {(validState.confirmPass) ? <p style={{"color" : "red"}}>Confirm must match password</p> : null }
                 </div>
             </form>
         </div>
