@@ -20,6 +20,45 @@ const Form = (props) => {
         })
     };
 
+    // Set default boolean to validations below
+    const [ validState, setValidState ] = useState({
+        "firstName" : false,
+        "lastName" : false,
+        "email" : false,
+        "confirmPass" : false
+    })
+    
+    // Validations
+    const submitHandler = (e) => {
+        e.preventDefault();
+        let firstName = false;
+        let lastName = false;
+        let email = false;
+        let confirmPass = false;
+        // First name must contain more than 2 characters
+        if(inputs.firstName.length >= 2){
+            firstName = true;
+        }
+        // Last name must contain more than 2 characters
+        if(inputs.lastName.length > 2){
+            lastName = true;
+        }
+        // Email must contain more than 5 characters
+        if(inputs.email.length > 5){
+            email = true;
+        }
+        // Password must match and be at least 8 characters
+        if(inputs.confirmPass != inputs.password){
+            confirmPass = true;
+        }
+        setValidState({
+            firstName,
+            lastName,
+            email,
+            confirmPass
+        })
+    }
+
     // const createUser = (e) => {
     //     e.preventDefault();
     //     const newUser = {firstName, lastName}
@@ -32,10 +71,12 @@ const Form = (props) => {
 
     return (
         <div>
-            <form>
+            <form onChange={submitHandler}>
                 <div>
                     <label>First Name </label>
                     <input onChange={onChange} type="text" name="firstName" />
+                    {(validState.firstName) ? null : <p style={{"color" : "red"}}>Error</p> }
+                    {/* {(inputs.firstName.length < 2) ? <p style={{"color" : "red"}}> First name must contain more than 2 characters</p> : null} */}
                 </div>
                 <div>
                     <label>Last Name </label>
