@@ -38,7 +38,7 @@ const Form = (props) => {
         let password = false;
         let confirmPass = false;
         // First name must contain more than 2 characters
-        if(inputs.firstName.length >= 1){
+        if(inputs.firstName.length >= 2){
             firstName = true;
         }
         // Last name must contain more than 2 characters
